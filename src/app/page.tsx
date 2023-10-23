@@ -77,7 +77,7 @@ export default function Home() {
         {favs.map((item) => (
           <div
             key={item}
-            className="flex items-center justify-between bg-custom-button text-white text-xl m-8 rounded-xl h-12 flex items-center justify-center h-16 h-auto"
+            className="flex items-center justify-between bg-custom-button text-white text-xl m-8 rounded-xl h-12 flex items-center justify-center h-24 h-auto"
           >
             <div className="ml-6">{item}</div>{" "}
             <div
