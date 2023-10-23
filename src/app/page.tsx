@@ -10,6 +10,13 @@ export default function Home() {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
+    const listaNaoParseada: any  = localStorage.getItem("listaFavoritos");
+    const listaParseada = JSON.parse(listaNaoParseada) || [];
+
+    setFavs(listaParseada)
+  })
+
+  useEffect(() => {
     jokes()
   }, [])
 
@@ -28,6 +35,7 @@ export default function Home() {
       var index = favs.indexOf(item)
       console.log(index)
       favs.splice(index, 1)
+      location.reload()
     }
   }
 
@@ -37,6 +45,9 @@ export default function Home() {
     setFavs(newJoke);
     console.log(newJoke)
     setShow(false)
+
+    const listaString = JSON.stringify(newJoke)
+    localStorage.setItem("listaFavoritos", listaString)
   }
 
   
