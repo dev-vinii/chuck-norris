@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import {GenerateJoke, AddFavs} from "./components/Button";
+import {GenerateJoke, AddFavs} from "./components/button";
 
 export default function Home() {
 
