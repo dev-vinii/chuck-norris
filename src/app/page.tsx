@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GenerateJoke, AddFavs } from "./components/button";
+import GenerateJoke from "./components/button";
 
 export default function Home() {
   const [joke, setJoke] = useState("");
@@ -56,10 +56,10 @@ export default function Home() {
         <div className="flex items-center justify-center m-20">
           <div className="bg-custom-purple w-auto laptop:w-auto desktop:w-auto h-auto rounded-2xl">
             <div className="text-violet-300 mt-5 text-2xl">Joke</div>
-            <div className="text-white font-bold m-10 text-xl">"{joke}"</div>
+            <div className="text-white font-bold m-10 text-xl">{joke}</div>
             <div className="flex items-center justify-center">
               <div onClick={jokes} className="flex justify-center">
-                <GenerateJoke></GenerateJoke>
+                <GenerateJoke phrase={"Generate Joke"}></GenerateJoke>
               </div>
               {show ? (
                 <div
@@ -67,7 +67,7 @@ export default function Home() {
                   id="button"
                   className="ml-5"
                 >
-                  <AddFavs></AddFavs>
+                  <GenerateJoke phrase={"Add Favorites"}></GenerateJoke>
                 </div>
               ) : null}
             </div>
@@ -77,9 +77,9 @@ export default function Home() {
         {favs.map((item) => (
           <div
             key={item}
-            className="flex items-center justify-between bg-custom-button text-white text-xl m-8 rounded-xl h-12 flex items-center justify-center h-24 h-auto"
+            className="flex items-center justify-between bg-custom-button text-white text-xl m-8 rounded-xl h-12 flex items-center justify-center laptop: h-auto desktop:h-16"
           >
-            <div className="ml-6">{item}</div>{" "}
+            <div className="m-6">{item}</div>{" "}
             <div
               className="text-red-300 cursor-pointer mr-6 font-bold"
               onClick={() => deleteFav(item)}
