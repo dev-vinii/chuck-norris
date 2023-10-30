@@ -31,10 +31,8 @@ export default function Home() {
   const deleteFav = (item: string) => {
     var deleteFav = confirm("Are you sure?");
     if (deleteFav == true) {
-      var index = favs.indexOf(item);
-      console.log(index);
-      favs.splice(index, 1);
-      location.reload();
+      const favoritosFiltrados = favs.filter((phrase) => item !== phrase);
+      setFavs(favoritosFiltrados);
     }
   };
 
