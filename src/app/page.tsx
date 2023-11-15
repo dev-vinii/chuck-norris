@@ -71,7 +71,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="mb-10 text-violet-300">Lista de Favoritos</div>
+        <div className="mb-10 text-violet-300">Favorite List</div>
         {favs.map((item) => (
           <div
             key={item}
