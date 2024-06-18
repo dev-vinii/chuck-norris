@@ -1,33 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import GenerateJoke from "./components/button";
+import GenerateJoke from "../components/button";
+import { useFetchJoke } from "../hooks/useFetchJoke";
 
-export default function Home() {
+export default function Jokes() {
   const [joke, setJoke] = useState("");
   const [favs, setFavs] = useState<string[]>([]);
   const [show, setShow] = useState(true);
 
   useEffect(() => {
     const listaNaoParseada: any = localStorage.getItem("listaFavoritos");
-    const listaParseada = JSON.parse(listaNaoParseada) || [];
+    const listaParseada = JSON.parse(listaNaoParseada) ?? [];
 
     setFavs(listaParseada);
+    getJoke();
   }, []);
-
-  useEffect(() => {
-    jokes();
-  }, []);
-
-  const jokes = () => {
-    fetch("https://api.chucknorris.io/jokes/random")
-      .then((response) => response.json())
-      .then((data) => {
-        setJoke(data.value);
-      });
+  
+  const getJoke = async () => {
+    const joke = await useFetchJoke();  
+    setJoke(joke ?? "");
     setShow(true);
   };
-
+  
   const deleteFav = (item: string) => {
     var deleteFav = confirm("Are you sure?");
     if (deleteFav == true) {
@@ -40,7 +35,6 @@ export default function Home() {
     const newJoke = [...favs];
     newJoke.push(joke);
     setFavs(newJoke);
-    console.log(newJoke);
     setShow(false);
 
     const listaString = JSON.stringify(newJoke);
@@ -56,7 +50,7 @@ export default function Home() {
             <div className="text-violet-300 mt-5 text-2xl">Joke</div>
             <div className="text-white font-bold m-10 text-xl">{joke}</div>
             <div className="flex items-center justify-center">
-              <div onClick={jokes} className="flex justify-center">
+              <div onClick={getJoke} className="flex justify-center">
                 <GenerateJoke phrase={"Generate Joke"}></GenerateJoke>
               </div>
               {show ? (
@@ -75,7 +69,7 @@ export default function Home() {
         {favs.map((item) => (
           <div
             key={item}
-            className="flex items-center justify-between bg-custom-button text-white text-xl m-8 rounded-xl h-12 flex items-center justify-center laptop: h-auto desktop:h-16"
+            className="bg-custom-button text-white text-xl m-8 rounded-xl h-12 flex items-center justify-center laptop:h-auto desktop:h-16"
           >
             <div className="m-6">{item}</div>{" "}
             <div
