@@ -42,6 +42,7 @@ export const useJoke = () => {
       .then((response) => response.json())
       .then((data) => {
         setJoke(data.joke);
+        setShow(true)
       });
   };
 
