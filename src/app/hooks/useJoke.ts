@@ -8,8 +8,7 @@ export const useJoke = () => {
   useEffect(() => {
     const unparsedList: any = localStorage.getItem("favoritesList");
     const parsedList = JSON.parse(unparsedList) ?? [];
-    
-    
+
     setFavorites(parsedList);
     getJoke();
   }, []);
@@ -34,7 +33,7 @@ export const useJoke = () => {
 
   const getJoke = async () => {
     if (!process.env.NEXT_PUBLIC_API_KEY) return;
-    
+
     await fetch("https://api.api-ninjas.com/v1/chucknorris?", {
       headers: {
         "X-Api-Key": process.env.NEXT_PUBLIC_API_KEY,
